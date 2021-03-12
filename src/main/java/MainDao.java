@@ -1,0 +1,2 @@
+public class MainDao {
+}
