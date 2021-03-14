@@ -45,7 +45,7 @@ public class MainDao {
 //        userToUpdate.setPassword("mmmmm");
 //        UserDao.update(userToUpdate);
 
-//        reading all users
+//        reading all users - wrong printing, to be fixed
         User[] all = UserDao.findAll();
         for (User u : all) {
             System.out.println(u);
