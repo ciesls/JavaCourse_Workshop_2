@@ -35,8 +35,8 @@ public class MainDao {
 
 
 //reading user test - not printing correctly
-//        User read = UserDao.read(1);
-//        System.out.println(read);
+        User read = UserDao.read(1);
+        System.out.println(read);
 
 //      update test - working
 //        User userToUpdate = UserDao.read(3);
@@ -46,10 +46,10 @@ public class MainDao {
 //        UserDao.update(userToUpdate);
 
 //        reading all users - wrong printing, to be fixed
-        User[] all = UserDao.findAll();
-        for (User u : all) {
-            System.out.println(u);
-        }
+//        User[] all = UserDao.findAll();
+//        for (User u : all) {
+//            System.out.println(u);
+//        }
 
 
     }

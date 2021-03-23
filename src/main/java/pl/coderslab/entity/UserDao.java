@@ -32,30 +32,6 @@ public class UserDao {
         }
     }
 
-//    below method doesn't use user object - to be confirmed why
-//    static void update(int idToUpdate) {
-//        try (Connection connection = DBUtil.getConnection();
-//             PreparedStatement pstmDeleteUser = connection.prepareStatement(UPDATE_USER)) {
-//            Scanner scanner = new Scanner(System.in);
-//            System.out.println("Please enter user name to be updated");
-//            String nameToBeUpdated = scanner.nextLine();
-//            System.out.println("Please email to be updated");
-//            String emailToBeUpdated = scanner.nextLine();
-//            System.out.println("Please enter your new password");
-//            String passToBeUpdated = scanner.nextLine();
-//            scanner.close();
-//
-//            pstmDeleteUser.setInt(1, nameToBeUpdated);
-//            pstmDeleteUser.setString(2, emailToBeUpdated);
-//            pstmDeleteUser.setString(3, passToBeUpdated);
-//            pstmDeleteUser.setInt(4, idToUpdate);
-//            pstmDeleteUser.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public static void update(User user) {
         try (Connection connection = DBUtil.getConnection();
              PreparedStatement pstmUpdateUser = connection.prepareStatement(UPDATE_USER)) {
@@ -120,17 +96,20 @@ public class UserDao {
         try (Connection connection = DBUtil.getConnection();
              PreparedStatement pstmReadAllUsers = connection.prepareStatement(GET_ALL_USERS)) {
 
+//            update code for reading users and creating array
             ResultSet resultSet = pstmReadAllUsers.executeQuery();
-        while (resultSet.next()) {
-        allUsers = Arrays.copyOf(allUsers, allUsers.length + 1);
-        allUsers[allUsers.length - 1] = new User(resultSet.getInt("id"), resultSet.getString("username"),
-                resultSet.getString("email"), resultSet.getString("password"));
+            while (resultSet.next()) {
+                allUsers = Arrays.copyOf(allUsers, allUsers.length + 1);
+                allUsers[allUsers.length - 1] = new User(resultSet.getInt("id"), resultSet.getString("username"),
+                        resultSet.getString("email"), resultSet.getString("password"));
 
-        } return allUsers;
+            }
+            return allUsers;
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } return null;
+        }
+        return null;
     }
 
     public static String hashPassword(String password) {
